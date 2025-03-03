@@ -4,7 +4,9 @@ const { jwtSecret } = require('../config');
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log(name, email, password);
   try {
+    
     const user = new User({ name, email, password });
     await user.save();
     const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1h' });
