@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../config');
+// const { jwtSecret } = require('../config');
+const jwtSecret = process.env.jwtSecret;
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -12,10 +13,10 @@ const register = async (req, res) => {
     if (ifuser) {
       return res.status(400).json({ message: 'User already exists' });
     }
-    
+
     await user.save();
     const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1h' });
-    res.status(201).json({ token });
+    res.status(201).json({ "token": token, "message": "User registered successfully" });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user', error });
   }

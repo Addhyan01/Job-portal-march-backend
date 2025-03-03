@@ -1,3 +1,4 @@
+dotenv.config();
 const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
@@ -8,8 +9,13 @@ const analyticsRoutes = require('./controllers/analytics');
 // const { mongoURI } = require('./config');
 const cors = require('cors');
 
-dotenv.config();
-mongoose.connect(process.env.mongoURI);
+mongoose.connect(process.env.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.error("MongoDB connection error:", err));
+    
 const app = express();
 app.use(cors());
 
