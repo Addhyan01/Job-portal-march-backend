@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.mongoURI);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
