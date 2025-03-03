@@ -8,6 +8,11 @@ const register = async (req, res) => {
   try {
     
     const user = new User({ name, email, password });
+    const ifuser = await User.findOne({ email });
+    if (ifuser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+    
     await user.save();
     const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1h' });
     res.status(201).json({ token });
