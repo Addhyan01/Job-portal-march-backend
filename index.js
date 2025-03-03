@@ -1,6 +1,7 @@
+const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
-const dotenv = require('dotenv');
+
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
@@ -15,7 +16,7 @@ mongoose.connect(process.env.mongoURI, {
   })
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("MongoDB connection error:", err));
-    
+
 const app = express();
 app.use(cors());
 
