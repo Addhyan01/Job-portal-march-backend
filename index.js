@@ -7,13 +7,14 @@ const taskRoutes = require('./routes/taskRoutes');
 const analyticsRoutes = require('./controllers/analytics');
 // const { mongoURI } = require('./config');
 const cors = require('cors');
-app.use(bodyParser.json());
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
+app.use(bodyParser.json());
 
 mongoose.connect(process.env.mongoURI);
 
