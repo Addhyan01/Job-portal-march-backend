@@ -9,12 +9,14 @@ const analyticsRoutes = require('./controllers/analytics');
 const cors = require('cors');
 
 dotenv.config();
-
+mongoose.connect(process.env.mongoURI);
 const app = express();
 app.use(cors());
 
 app.use(express.json());
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    extended: true
+}));
 
 mongoose.connect(process.env.mongoURI);
 
