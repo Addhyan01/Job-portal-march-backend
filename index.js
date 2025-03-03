@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const analyticsRoutes = require('./controllers/analytics');
-const { mongoURI } = require('./config');
+// const { mongoURI } = require('./config');
 const cors = require('cors');
 
 dotenv.config();
@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
